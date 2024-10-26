@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <div className="h-[100dvh] flex justify-between items-center">
       {/** Main */}
-      <main className="basis-[50%] h-full p-20 flex flex-col justify-center items-center">
+      <main className="h-full w-full p-4 sm:p-20 flex flex-col justify-center items-center">
         <Logo className="mx-auto mb-10" />
         {children}
       </main>
@@ -27,7 +27,7 @@ export default function RootLayout({
         width={1200}
         height={1080}
         alt="Banner"
-        className="basis-[50%] w-full h-full"
+        className="w-[50%] object-cover h-full hidden lg:block"
       />
     </div>
   );

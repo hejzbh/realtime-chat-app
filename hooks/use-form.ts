@@ -4,10 +4,13 @@ type FormValues = { [key: string]: any };
 type Errors = { [key: string]: string };
 type Validators = { [key: string]: (value: any) => string | undefined };
 
-export const useForm = (
-  initialValues: FormValues,
-  validators: Validators = {}
-) => {
+export const useForm = ({
+  initialValues,
+  validators = {},
+}: {
+  initialValues: FormValues;
+  validators?: Validators;
+}) => {
   const [values, setValues] = useState<FormValues>(initialValues);
   const [errors, setErrors] = useState<Errors>({});
   const [touched, setTouched] = useState<{ [key: string]: boolean }>({});

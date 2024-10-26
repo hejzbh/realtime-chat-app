@@ -72,7 +72,6 @@ export const useForm = (
     touched,
     isSubmitting,
     handleChange,
-
     handleSubmit,
     resetForm,
   };

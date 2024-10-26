@@ -16,8 +16,8 @@ export default function RootLayout({
   return (
     <div className="h-[100dvh] flex justify-between items-center">
       {/** Main */}
-      <main className="basis-[50%] h-full p-20">
-        <Logo className="mx-auto" />
+      <main className="basis-[50%] h-full p-20 flex flex-col justify-center items-center">
+        <Logo className="mx-auto mb-10" />
         {children}
       </main>
       {/** Image  */}

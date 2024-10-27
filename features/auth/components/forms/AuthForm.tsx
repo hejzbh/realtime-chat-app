@@ -8,6 +8,8 @@ import { validateName } from "@/features/auth/utils/validateName";
 import { initialValues } from "@/features/auth/data/initialFormValues";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa6";
+import axios from "axios";
+import { signIn } from "next-auth/react";
 
 const Form = dynamic(() => import("@/components/forms/Form"));
 const Text = dynamic(() => import("@/components/ui/Text"));
@@ -18,18 +20,20 @@ export interface AuthFormProps {
   variant: "sign-up" | "sign-in";
 }
 
-const formValidators: Validators = {
-  password: (inputValue) =>
-    inputValue.length < 8
+const signUpValidators: Validators = {
+  password: (inputValue: string) => {
+    return inputValue?.length < 8
       ? "Password should be at least 8 characters"
-      : undefined,
-  firstName: (inputValue) =>
-    validateName({ inputName: "firstName", inputValue }),
-  lastName: (inputValue) => validateName({ inputName: "lastName", inputValue }),
-  userName: () => {
-    // TODO: Check does that username exists on back-end
-    return undefined;
+      : undefined;
   },
+  firstName: (inputValue: string) =>
+    validateName({ inputName: "firstName", inputValue }),
+  lastName: (inputValue: string) =>
+    validateName({ inputName: "lastName", inputValue }),
+}; // todo: username
+
+const signInValidators: Validators = {
+  password: signUpValidators.password,
 };
 
 const AuthForm = ({ className = "", variant }: AuthFormProps) => {
@@ -45,12 +49,28 @@ const AuthForm = ({ className = "", variant }: AuthFormProps) => {
 
   async function onSubmit(values: FormValues) {
     try {
+      // TODO:: Notifications
       if (variant === "sign-in") {
         // Login functionality
       }
 
       if (variant === "sign-up") {
         // Register Functionality
+        await axios.post(`/api/register`, values);
+      } else {
+        await signIn("credentials", {
+          ...values,
+          redirect: false,
+        }).then((callback) => {
+          if (callback?.error) {
+            alert("ERROR");
+            return;
+          }
+
+          if (callback?.ok) {
+            alert("Success");
+          }
+        });
       }
     } catch {}
   }
@@ -66,7 +86,7 @@ const AuthForm = ({ className = "", variant }: AuthFormProps) => {
             : "Sign up to share moments with friends!"
         }
         formInputs={formInputs}
-        validators={formValidators}
+        validators={variant === "sign-up" ? signUpValidators : signInValidators}
         onSubmit={onSubmit}
       >
         {/** Social Authentication Options */}

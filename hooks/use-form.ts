@@ -1,8 +1,12 @@
+import { AsyncFunction } from "@/types/global";
 import { useState } from "react";
+import { isAsyncFunction } from "@/utils/is-async-function";
 
 export type FormValues = { [key: string]: any };
 type Errors = { [key: string]: string };
-export type Validators = { [key: string]: (value: any) => string | undefined };
+export type Validators = {
+  [key: string]: AsyncFunction<any> | ((value: string) => string | undefined);
+};
 
 export const useForm = ({
   initialValues,
@@ -32,10 +36,20 @@ export const useForm = ({
   };
 
   // Validate all fields on submit
-  const validateForm = () => {
+  const validateForm = async () => {
     const newErrors: Errors = {};
+    console.log(validators);
     for (const key in validators) {
-      const error = validators[key](values[key]);
+      const validateFunction = validators[key];
+
+      let error;
+
+      if (isAsyncFunction(validateFunction)) {
+        error = await validateFunction(values[key]);
+      } else {
+        error = validateFunction(values[key]);
+      }
+
       if (error) newErrors[key] = error;
     }
     setErrors(newErrors);
@@ -51,8 +65,9 @@ export const useForm = ({
 
     try {
       setIsSubmitting(true);
-      if (validateForm()) {
+      if (await validateForm()) {
         await onSubmit(values);
+        resetForm();
       }
     } catch (err: any) {
       throw new Error(err.message);

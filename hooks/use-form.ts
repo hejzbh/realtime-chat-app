@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-type FormValues = { [key: string]: any };
+export type FormValues = { [key: string]: any };
 type Errors = { [key: string]: string };
-type Validators = { [key: string]: (value: any) => string | undefined };
+export type Validators = { [key: string]: (value: any) => string | undefined };
 
 export const useForm = ({
   initialValues,
@@ -13,11 +13,10 @@ export const useForm = ({
 }) => {
   const [values, setValues] = useState<FormValues>(initialValues);
   const [errors, setErrors] = useState<Errors>({});
-  const [touched, setTouched] = useState<{ [key: string]: boolean }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Handle value change
-  const handleChange = (
+  const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = event.target;
@@ -48,6 +47,8 @@ export const useForm = ({
   const handleSubmit = async (
     onSubmit: (values: FormValues) => Promise<void> | void
   ) => {
+    if (isSubmitting) return; // Cannot run this function until prevously called function is not done yet.
+
     try {
       setIsSubmitting(true);
       if (validateForm()) {
@@ -65,16 +66,14 @@ export const useForm = ({
   const resetForm = () => {
     setValues(initialValues);
     setErrors({});
-    setTouched({});
     setIsSubmitting(false);
   };
 
   return {
     values,
     errors,
-    touched,
     isSubmitting,
-    handleChange,
+    handleInputChange,
     handleSubmit,
     resetForm,
   };

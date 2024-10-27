@@ -5,7 +5,7 @@ import Link from "next/link";
 const AuthForm = dynamic(
   () => import("@/features/auth/components/forms/AuthForm")
 );
-const Paragraph = dynamic(() => import("@/components/ui/Paragraph"));
+const Paragraph = dynamic(() => import("@/components/ui/Text"));
 
 const SignInPage = () => {
   return (

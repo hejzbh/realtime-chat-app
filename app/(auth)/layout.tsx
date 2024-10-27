@@ -14,9 +14,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="h-[100dvh] flex justify-between items-center">
+    <div className="grid lg:grid-cols-2 min-h-[100dvh]">
       {/** Main */}
-      <main className="h-full w-full p-4 sm:p-20 flex flex-col justify-center items-center">
+      <main className="h-full w-full px-4 py-4 sm:px-32 flex flex-col justify-center items-center">
         <Logo className="mx-auto mb-10" />
         {children}
       </main>
@@ -27,7 +27,7 @@ export default function RootLayout({
         width={1200}
         height={1080}
         alt="Banner"
-        className="w-[50%] object-cover h-full hidden lg:block"
+        className="object-cover h-full  hidden lg:block"
       />
     </div>
   );

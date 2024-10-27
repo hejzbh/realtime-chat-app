@@ -18,7 +18,7 @@ export interface FormProps {
   submitTitle?: string;
   title: string;
   description: string;
-
+  children?: React.ReactNode;
   onSubmit: (formValues: FormValues) => void;
 }
 
@@ -30,12 +30,14 @@ const Form = ({
   title = "",
   description,
   submitTitle = "Submit",
+  children = <></>,
   onSubmit,
 }: FormProps) => {
-  const { values, handleInputChange, errors, handleSubmit } = useForm({
-    initialValues,
-    validators,
-  });
+  const { values, handleInputChange, errors, handleSubmit, isSubmitting } =
+    useForm({
+      initialValues,
+      validators,
+    });
 
   return (
     <form
@@ -66,6 +68,7 @@ const Form = ({
                 name={input.name}
                 error={errors[input.name]}
                 label={input.label}
+                disabled={isSubmitting}
                 value={values[input.name]}
                 type={input.type}
                 Icon={input.Icon}
@@ -78,10 +81,13 @@ const Form = ({
 
       {/** Button */}
       <div className="flex justify-end mt-5">
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" disabled={isSubmitting}>
           {submitTitle}
         </Button>
       </div>
+
+      {/** Children ? */}
+      {children}
     </form>
   );
 };

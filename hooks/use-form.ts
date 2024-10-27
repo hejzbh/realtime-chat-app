@@ -54,7 +54,6 @@ export const useForm = ({
       if (validateForm()) {
         await onSubmit(values);
       }
-      setIsSubmitting(false);
     } catch (err: any) {
       throw new Error(err.message);
     } finally {

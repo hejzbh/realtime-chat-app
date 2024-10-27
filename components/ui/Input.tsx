@@ -13,6 +13,7 @@ export interface InputProps {
   Icon?: FormInputType["Icon"];
   error: string | null | undefined;
   required?: boolean;
+  disabled?: boolean;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -25,6 +26,7 @@ const Input = ({
   onChange,
   error,
   Icon,
+  disabled,
   required,
   value,
 }: InputProps) => {
@@ -55,6 +57,7 @@ const Input = ({
           name={name}
           required={required}
           onChange={onChange}
+          disabled={disabled}
           value={value}
           className={`border-[1px] border-borderColors-primary p-2 rounded-md w-full outline-none text-sm text-textColors-primary ${
             Icon && "pl-9"

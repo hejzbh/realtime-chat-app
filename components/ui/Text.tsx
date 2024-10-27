@@ -21,7 +21,7 @@ type FontSizeKeys =
   | "5xl";
 
 export const textFontSizes: Record<FontSizeKeys, string> = {
-  xs: "text-[.6rem] sm:text-[.65rem] md:text-[.7rem]",
+  xs: "text-[.6rem] sm:text-[.65rem] md:text-[.8rem]",
   sm: "text-[.7rem] sm:text-[.8rem] md:text-[.9rem]",
   base: "text-[.8rem] sm:text-[.9rem] md:text-[1rem]",
   lg: "text-[.9rem] sm:text-[1rem] md:text-[1.1rem]",

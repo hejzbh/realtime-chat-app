@@ -1,6 +1,6 @@
 {
   "extends": "next/core-web-vitals",
-  "roles": {
+  "rules": {
     "react/no-unescaped-entities": "off"
   }
 }

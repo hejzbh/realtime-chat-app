@@ -18,6 +18,7 @@ module.exports = {
         borderColors: {
           primary: "#E8E8E9",
         },
+        danger: "#E91E63",
       },
     },
   },

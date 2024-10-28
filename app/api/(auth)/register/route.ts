@@ -10,9 +10,6 @@ export async function POST(request: Request) {
 
     const { email, password, firstName, lastName, userName } = body;
 
-    console.log(body);
-    console.log("🐶🐶🐶🐶");
-
     if (!email || !password)
       return new NextResponse("Missing Data", {
         status: errorStatuses.MISSING_DATA,
@@ -23,8 +20,8 @@ export async function POST(request: Request) {
     const user = await db.user.create({
       data: {
         email,
-        fullName: firstName + " " + lastName,
-        userName,
+        name: firstName + " " + lastName,
+        username: userName,
         password: {
           create: {
             hash: hashedPassword,
@@ -33,8 +30,16 @@ export async function POST(request: Request) {
       },
     });
 
+    console.log(user);
+
     return NextResponse.json(user);
   } catch (err: any) {
+    if (err?.meta?.target?.includes("email"))
+      err.message = "User with same e-mail already exists!";
+
+    if (err?.meta?.target?.includes("username"))
+      err.message = "User with same username already exists!";
+
     return new NextResponse(err.message, {
       status: errorStatuses.INTERNAL_SERVER_ERROR,
     });

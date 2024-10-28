@@ -1,6 +1,14 @@
 import "./globals.css";
 
+import dynamic from "next/dynamic";
 import { Inter } from "next/font/google";
+
+const SessionProvider = dynamic(
+  () => import("@/components/providers/SessionProvider")
+);
+const NotificationsProvider = dynamic(
+  () => import("@/components/providers/NotificationsProvider")
+);
 
 const font = Inter({
   subsets: ["latin-ext"],
@@ -18,7 +26,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`bg-[#F4F1FF] ${font.className}`}>{children}</body>
+      <body className={`bg-[#F4F1FF] ${font.className}`}>
+        <SessionProvider>
+          <NotificationsProvider>{children}</NotificationsProvider>
+        </SessionProvider>
+      </body>
     </html>
   );
 }

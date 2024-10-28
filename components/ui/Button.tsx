@@ -8,7 +8,7 @@ export interface ButtonProps {
   textSize?: TextProps["size"];
   disabled?: boolean;
   children: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   className?: string;
 }
 

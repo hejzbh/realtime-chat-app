@@ -38,7 +38,7 @@ export const useForm = ({
   // Validate all fields on submit
   const validateForm = async () => {
     const newErrors: Errors = {};
-    console.log(validators);
+
     for (const key in validators) {
       const validateFunction = validators[key];
 
@@ -67,7 +67,7 @@ export const useForm = ({
       setIsSubmitting(true);
       if (await validateForm()) {
         await onSubmit(values);
-        resetForm();
+        // resetForm();
       }
     } catch (err: any) {
       throw new Error(err.message);

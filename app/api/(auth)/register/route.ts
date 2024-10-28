@@ -30,8 +30,6 @@ export async function POST(request: Request) {
       },
     });
 
-    console.log(user);
-
     return NextResponse.json(user);
   } catch (err: any) {
     if (err?.meta?.target?.includes("email"))

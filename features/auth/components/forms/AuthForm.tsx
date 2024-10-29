@@ -8,8 +8,8 @@ import { validateName } from "@/features/auth/utils/validateName";
 import { initialValues } from "@/features/auth/data/initialFormValues";
 import { useRouter } from "next/navigation";
 import { useNotifications } from "@/hooks/use-notifications";
-import handleSignIn from "../../actions/handleSignIn";
-import handleSignUp from "../../actions/handleSignUp";
+import handleSignIn from "@/features/auth/actions/handleSignIn";
+import handleSignUp from "@/features/auth/actions/handleSignUp";
 import { handleSocialLogin } from "../../actions/handleSocialLogin";
 import { routePaths } from "@/data/routePaths";
 
@@ -45,6 +45,7 @@ const AuthForm = ({ className = "", variant }: AuthFormProps) => {
   const { showNotification } = useNotifications();
   const router = useRouter();
 
+  // Import file that we should use at this point
   useEffect(() => {
     import("@/features/auth/data/formInputs").then((res) =>
       setFormInputs(

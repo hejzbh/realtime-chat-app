@@ -3,6 +3,7 @@ import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 import errorStatuses from "@/data/errorStatuses";
 import { hashPassword } from "@/features/auth/utils/passwords";
+import capitalize from "@/utils/capitalize";
 
 export async function POST(request: Request) {
   try {
@@ -20,8 +21,8 @@ export async function POST(request: Request) {
     const user = await db.user.create({
       data: {
         email,
-        name: firstName + " " + lastName,
-        username: userName,
+        name: capitalize(firstName) + " " + capitalize(lastName),
+        username: userName.toLowerCase(),
         password: {
           create: {
             hash: hashedPassword,

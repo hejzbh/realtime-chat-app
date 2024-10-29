@@ -6,12 +6,12 @@ import { FormInputType } from "@/types/formTypes";
 import { FormValues, Validators } from "@/hooks/use-form";
 import { validateName } from "@/features/auth/utils/validateName";
 import { initialValues } from "@/features/auth/data/initialFormValues";
-import axios from "axios";
-import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useNotifications } from "@/hooks/use-notifications";
 import handleSignIn from "../../actions/handleSignIn";
 import handleSignUp from "../../actions/handleSignUp";
 import { handleSocialLogin } from "../../actions/handleSocialLogin";
+import { routePaths } from "@/data/routePaths";
 
 const Form = dynamic(() => import("@/components/forms/Form"));
 const Text = dynamic(() => import("@/components/ui/Text"));
@@ -43,6 +43,7 @@ const signInValidators: Validators = {
 const AuthForm = ({ className = "", variant }: AuthFormProps) => {
   const [formInputs, setFormInputs] = useState<FormInputType[]>([]);
   const { showNotification } = useNotifications();
+  const router = useRouter();
 
   useEffect(() => {
     import("@/features/auth/data/formInputs").then((res) =>
@@ -61,7 +62,7 @@ const AuthForm = ({ className = "", variant }: AuthFormProps) => {
 
       if (variant === "sign-up") {
         // Register Functionality
-        await handleSignUp(values);
+        await handleSignUp(values).then(() => router.push(routePaths.SIGN_IN));
       }
 
       // If we successfully did action, show notification

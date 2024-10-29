@@ -3,6 +3,7 @@ import Github from "next-auth/providers/github";
 import { db } from "./lib/db";
 import { comparePasswords } from "./features/auth/utils/passwords";
 import { AuthOptions } from "next-auth";
+import { routePaths } from "./data/routePaths";
 
 export default {
   providers: [
@@ -64,6 +65,6 @@ export default {
       return session;
     },
   },
-  pages: { signIn: "/sign-in" },
+  pages: { signIn: routePaths.SIGN_IN },
   session: { strategy: "jwt" },
 } as AuthOptions;

@@ -1,8 +1,9 @@
 import { withAuth } from "next-auth/middleware";
+import { routePaths } from "./data/routePaths";
 
 export default withAuth({
   pages: {
-    signIn: "/sign-in",
+    signIn: routePaths.SIGN_IN,
   },
 });
 

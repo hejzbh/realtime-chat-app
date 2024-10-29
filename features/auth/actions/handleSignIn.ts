@@ -1,3 +1,4 @@
+import { routePaths } from "@/data/routePaths";
 import { FormValues } from "@/hooks/use-form";
 import { signIn } from "next-auth/react";
 
@@ -5,7 +6,7 @@ export const handleSignIn = async (values: FormValues) => {
   try {
     const callback = await signIn("credentials", {
       ...values,
-      callbackUrl: "/",
+      callbackUrl: routePaths.HOME,
       redirect: true,
     });
 

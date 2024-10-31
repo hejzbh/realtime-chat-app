@@ -1,11 +1,13 @@
 "use client";
+import { User } from "@prisma/client";
+import { DefaultSession } from "next-auth";
 import { useSession } from "next-auth/react";
 import React, { useEffect, useMemo, useState } from "react";
 
 export type AuthContextType = {
   isLoading: boolean;
   isAuthenticated: boolean;
-  user?: any;
+  user?: DefaultSession["user"];
 };
 
 export const AuthContext = React.createContext<AuthContextType | undefined>(

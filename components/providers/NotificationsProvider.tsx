@@ -58,7 +58,7 @@ export const NotificationsProvider: React.FC<{ children: React.ReactNode }> = ({
   return (
     <NotificationsContext.Provider value={{ notifications, showNotification }}>
       {children}
-      <div className="fixed bottom-5 right-5 !z-[2000]">
+      <div className="fixed top-10 left-[50%] translate-x-[-50%] !z-[2000]">
         {notifications.map((notification, index) => {
           const isNewestNotification = index === notifications.length - 1;
 

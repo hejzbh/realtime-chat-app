@@ -79,6 +79,7 @@ const AuthForm = ({ className = "", variant }: AuthFormProps) => {
             : "Now, login with your credentials",
       });
     } catch (err: any) {
+      console.log(err);
       // Handle error
       showNotification({
         variant: "error",

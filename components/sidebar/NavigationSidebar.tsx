@@ -3,9 +3,9 @@ import dynamic from "next/dynamic";
 
 const Logo = dynamic(() => import("@/components/ui/Logo"));
 const NavigationLinks = dynamic(
-  () => import("@/components/navigation/NavigationLinks")
+  () => import("@/components/sidebar/NavigationLinks")
 );
-const UserWidget = dynamic(() => import("@/components/navigation/UserWidget"));
+const UserWidget = dynamic(() => import("@/components/sidebar/UserWidget"));
 
 export interface NavigationSidebarProps {
   className?: string;
@@ -18,7 +18,7 @@ const NavigationSidebar = ({ className = "" }: NavigationSidebarProps) => {
     >
       <main>
         <Logo />
-        <NavigationLinks />
+        <NavigationLinks className="mt-10" />
       </main>
       <UserWidget />
     </aside>

@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 
 const NavigationSidebar = dynamic(
-  () => import("@/components/navigation/NavigationSidebar")
+  () => import("@/components/sidebar/NavigationSidebar")
 );
 
 export default function RootLayout({

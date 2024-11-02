@@ -7,11 +7,12 @@ export const handleSignIn = async (values: FormValues) => {
     const callback = await signIn("credentials", {
       ...values,
       callbackUrl: routePaths.HOME,
-      redirect: true,
+      redirect: false,
     });
 
-    if (callback?.error || !callback?.ok)
+    if (callback?.error || !callback?.ok) {
       throw new Error(callback?.error || "Request failed");
+    }
 
     return true;
   } catch (err: any) {

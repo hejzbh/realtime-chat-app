@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import clsx from "@/utils/clsx";
+import Link from "next/link";
 
 export interface LogoProps {
   className?: string;
@@ -8,14 +9,16 @@ export interface LogoProps {
 
 const Logo = ({ className = "" }: LogoProps) => {
   return (
-    <Image
-      src={"/images/logo.webp"}
-      width={150}
-      height={150}
-      className={clsx(className, "w-[80px] md:w-[150px]")}
-      loading="lazy"
-      alt="Logo"
-    />
+    <Link className={className} href={"/"}>
+      <Image
+        src={"/images/logo.webp"}
+        width={150}
+        height={150}
+        className={clsx("w-[80px] md:w-[150px]")}
+        loading="lazy"
+        alt="Logo"
+      />
+    </Link>
   );
 };
 

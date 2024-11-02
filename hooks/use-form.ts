@@ -1,5 +1,5 @@
 import { AsyncFunction } from "@/types/global";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { isAsyncFunction } from "@/utils/is-async-function";
 
 export type FormValues = { [key: string]: any };
@@ -83,12 +83,15 @@ export const useForm = ({
     setIsSubmitting(false);
   };
 
-  return {
-    values,
-    errors,
-    isSubmitting,
-    handleInputChange,
-    handleSubmit,
-    resetForm,
-  };
+  return useMemo(
+    () => ({
+      values,
+      errors,
+      isSubmitting,
+      handleInputChange,
+      handleSubmit,
+      resetForm,
+    }),
+    [values, errors, isSubmitting]
+  );
 };

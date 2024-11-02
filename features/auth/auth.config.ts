@@ -1,9 +1,9 @@
 import Credentials from "next-auth/providers/credentials";
 import Github from "next-auth/providers/github";
-import { db } from "./lib/db";
-import { comparePasswords } from "./features/auth/utils/passwords";
+import { db } from "../../lib/db";
+import { comparePasswords } from "./utils/passwords";
 import { AuthOptions } from "next-auth";
-import { routePaths } from "./data/routePaths";
+import { routePaths } from "../../data/routePaths";
 
 export default {
   providers: [

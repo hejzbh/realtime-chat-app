@@ -22,8 +22,8 @@ const UserWidget = ({ className = "" }: UserWidgetProps) => {
           src={user?.image || "/images/user.webp"}
           alt="Avatar"
           className="rounded-full drop-shadow-md"
-          width={80}
-          height={80}
+          width={60}
+          height={60}
         />
       </Button>
     </div>

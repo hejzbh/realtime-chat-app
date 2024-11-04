@@ -1,4 +1,4 @@
-export const errorStatuses = {
+export const errorStatus = {
   BAD_REQUEST: 400,
   MISSING_DATA: 400,
   UNAUTHORIZED: 401,
@@ -15,4 +15,4 @@ export const errorStatuses = {
   BAD_GATEWAY: 502,
 };
 
-export default errorStatuses;
+export default errorStatus;

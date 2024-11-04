@@ -8,9 +8,9 @@ import { validateName } from "@/features/auth/utils/validateName";
 import { initialValues } from "@/features/auth/data/initialFormValues";
 import { useRouter } from "next/navigation";
 import { useNotifications } from "@/hooks/use-notifications";
-import handleSignIn from "@/features/auth/actions/handleSignIn";
-import handleSignUp from "@/features/auth/actions/handleSignUp";
-import { handleSocialLogin } from "../../actions/handleSocialLogin";
+import handleSignIn from "@/features/auth/services/handleSignIn";
+import handleSignUp from "@/features/auth/services/handleSignUp";
+import { handleSocialLogin } from "../../services/handleSocialLogin";
 import { routePaths } from "@/data/routePaths";
 
 const Form = dynamic(() => import("@/components/forms/Form"));

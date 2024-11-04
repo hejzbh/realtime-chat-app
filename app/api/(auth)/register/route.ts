@@ -1,7 +1,7 @@
 import { db } from "@/lib/db";
 
 import { NextResponse } from "next/server";
-import errorStatuses from "@/data/errorStatuses";
+import errorStatus from "@/data/errorStatus";
 import { hashPassword } from "@/features/auth/utils/passwords";
 import capitalize from "@/utils/capitalize";
 
@@ -13,7 +13,7 @@ export async function POST(request: Request) {
 
     if (!email || !password)
       return new NextResponse("Missing Data", {
-        status: errorStatuses.MISSING_DATA,
+        status: errorStatus.MISSING_DATA,
       });
 
     const hashedPassword = await hashPassword(password);
@@ -40,7 +40,7 @@ export async function POST(request: Request) {
       err.message = "User with same username already exists!";
 
     return new NextResponse(err.message, {
-      status: errorStatuses.INTERNAL_SERVER_ERROR,
+      status: errorStatus.INTERNAL_SERVER_ERROR,
     });
   }
 }

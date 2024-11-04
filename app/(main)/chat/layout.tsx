@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 
-const NavigationSidebar = dynamic(
-  () => import("@/components/sidebar/NavigationSidebar")
+const ChatSidebar = dynamic(
+  () => import("@/features/chat/components/sidebar/ChatSidebar")
 );
 
 export default async function RootLayout({
@@ -10,8 +10,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="grid grid-cols-[4%,96%]">
-      <NavigationSidebar className="min-h-[100dvh]" />
+    <div className="grid grid-cols-[20%,80%]">
+      <ChatSidebar className="min-h-[100dvh]" />
       <main>{children}</main>
     </div>
   );

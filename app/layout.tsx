@@ -12,6 +12,9 @@ const NotificationsProvider = dynamic(
 const AuthProvider = dynamic(
   () => import("@/features/auth/components/providers/AuthProvider")
 );
+const ModalProvider = dynamic(
+  () => import("@/components/providers/ModalProvider")
+);
 
 const font = Inter({
   subsets: ["latin-ext"],
@@ -32,7 +35,9 @@ export default function RootLayout({
       <body className={`bg-[#F4F1FF] ${font.className}`}>
         <SessionProvider>
           <AuthProvider>
-            <NotificationsProvider>{children}</NotificationsProvider>
+            <NotificationsProvider>
+              <ModalProvider>{children}</ModalProvider>
+            </NotificationsProvider>
           </AuthProvider>
         </SessionProvider>
       </body>

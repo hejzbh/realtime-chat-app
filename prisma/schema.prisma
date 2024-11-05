@@ -30,9 +30,13 @@ model User {
   passwordId String? @unique @db.ObjectId
   password Password? @relation(fields: [passwordId], references: [id], onDelete: Cascade)
 
-  chats Chat[]
-  seenMessages Message[] @relation("Seen")
-  messages Message[]
+  chats           Chat[]
+  seenMessages    Message[] @relation("Seen")
+  messages        Message[]
+  
+  sentContactRequests       ContactRequest[] @relation("SentRequests")
+  recievedContactRequests   ContactRequest[] @relation("RecievedRequests")
+  contacts        Contact[]
 
   Account         Account[]
 }
@@ -67,6 +71,30 @@ model Password {
   updatedAt DateTime @updatedAt
 
   user User? @relation
+
+}
+
+
+
+model ContactRequest {
+    id                String  @id @default(auto()) @map("_id") @db.ObjectId
+    senderId          String @db.ObjectId
+    recieverId        String @db.ObjectId
+    sender            User @relation("SentRequests", fields: [senderId], references: [id])
+    reciever          User @relation("RecievedRequests", fields: [recieverId], references: [id])
+
+    createdAt    DateTime  @default(now())
+
+    @@unique([senderId, recieverId])
+}
+
+
+model Contact {
+    id                String  @id @default(auto()) @map("_id") @db.ObjectId  
+    userIds String[] @db.ObjectId
+    users User @relation(fields: [userIds], references: [id])
+
+    createdAt    DateTime  @default(now())
 
 }
 

@@ -8,7 +8,6 @@ export const getChats = async (filter: "all-chats" | "recent-chats") => {
     // All chats
     if (filter === "all-chats") {
       chats = await db.chat.findMany({
-        take: 10,
         include: {
           users: true,
         },

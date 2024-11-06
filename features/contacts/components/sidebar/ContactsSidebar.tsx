@@ -1,27 +1,21 @@
-"use client";
 import React from "react";
-import Title from "@/components/ui/Title";
 import ContactsList from "@/features/contacts/components/ContactsList";
-import { useModal } from "@/hooks/use-modal";
+import SidebarToolbar from "@/components/sidebar/SidebarToolbar";
+import { ContactsPageSearchParams } from "@/app/(main)/contacts/page";
 
 export interface ContactsSidebarProps {
   className?: string;
+  searchParams: ContactsPageSearchParams;
 }
 
-const ContactsSidebar = ({ className = "" }: ContactsSidebarProps) => {
-  const { openModal } = useModal();
-
+const ContactsSidebar = async ({
+  className = "",
+  searchParams,
+}: ContactsSidebarProps) => {
   return (
-    <aside className={`bg-white p-3 ${className}`}>
-      <Title
-        variant="h3"
-        textSize="xl"
-        className="text-textColors-primary font-[500]"
-      >
-        Contacts
-      </Title>
+    <aside className={`bg-sidebar p-3 ${className}`}>
+      <SidebarToolbar title="Contacts" modalType="users" includeSearch />
       <ContactsList />
-      <button onClick={() => openModal("users")}>Open</button>
     </aside>
   );
 };

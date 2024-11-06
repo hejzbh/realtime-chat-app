@@ -1,13 +1,12 @@
 "use client";
 import { User } from "@prisma/client";
-import { DefaultSession } from "next-auth";
 import { useSession } from "next-auth/react";
 import React, { useEffect, useMemo, useState } from "react";
 
 export type AuthContextType = {
   isLoading: boolean;
   isAuthenticated: boolean;
-  user?: DefaultSession["user"];
+  user?: User;
 };
 
 export const AuthContext = React.createContext<AuthContextType | undefined>(
@@ -26,7 +25,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const value = useMemo(
     () => ({
-      user: session?.data?.user,
+      user: session?.data?.user as User,
       isLoading,
       isAuthenticated,
     }),

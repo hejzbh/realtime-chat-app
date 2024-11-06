@@ -1,5 +1,6 @@
 "use client";
-import React, { createContext, useMemo, useState } from "react";
+import dynamic from "next/dynamic";
+import React, { createContext, Suspense, useMemo, useState } from "react";
 
 export type ModalContextType = {
   isOpen: boolean;
@@ -47,10 +48,38 @@ const ModalProvider = ({ children }: { children: React.ReactNode }) => {
       {children}
 
       {isOpen && (
-        <div className="fixed top-0 left-0 w-full h-full bg-black/50"></div>
+        <div
+          className="fixed top-0 left-0 w-full h-full bg-black/50 flex items-center justify-center"
+          onClick={closeModal}
+        >
+          <div
+            className="bg-white rounded-xl p-5 w-full max-w-[50%]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {" "}
+            <RenderModal modalType={modalType} />
+          </div>
+        </div>
       )}
     </ModalContext.Provider>
   );
+};
+
+const RenderModal = ({ modalType }: { modalType: ModalType | undefined }) => {
+  switch (modalType) {
+    case "users":
+      const UsersModal = React.lazy(
+        () => import("@/features/users/components/modals/UsersModal")
+      );
+
+      return (
+        <Suspense fallback={"..."}>
+          <UsersModal />
+        </Suspense>
+      );
+    default:
+      return null;
+  }
 };
 
 export default ModalProvider;

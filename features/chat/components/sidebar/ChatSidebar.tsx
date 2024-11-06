@@ -1,8 +1,8 @@
 import React from "react";
 import { getChats } from "@/features/chat/services/get-chats";
-import Title from "@/components/ui/Title";
 import RecentChats from "./RecentChats";
 import AllChats from "./AllChats";
+import SidebarToolbar from "@/components/sidebar/SidebarToolbar";
 
 interface ChatSidebarProps {
   className?: string;
@@ -14,17 +14,9 @@ const ChatSidebar = async ({ className = "" }: ChatSidebarProps) => {
     getChats("all-chats"),
   ]);
 
-  console.log(recentChats);
-  console.log("🎇🎇🎇🎇");
   return (
-    <aside className={`bg-white p-3 ${className}`}>
-      <Title
-        variant="h3"
-        textSize="xl"
-        className="text-textColors-primary font-[500]"
-      >
-        Chats
-      </Title>
+    <aside className={`bg-sidebar p-3 ${className}`}>
+      <SidebarToolbar title="Chats" modalType="users" />
       <RecentChats />
       <AllChats />
     </aside>

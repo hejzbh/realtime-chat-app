@@ -1,4 +1,5 @@
-import { getServerSession } from "next-auth";
+"use server";
+import { getServerSession, User } from "next-auth";
 import authConfig from "../auth.config";
 
 export const useServerAuth = async () => {
@@ -8,7 +9,7 @@ export const useServerAuth = async () => {
     if (!session?.user) throw new Error("");
 
     return {
-      user: session?.user,
+      user: session?.user as User,
     };
   } catch {
     throw new Error("Unauthorized");

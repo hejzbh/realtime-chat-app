@@ -29,6 +29,18 @@ export async function GET(req: Request) {
         id: {
           not: serverAuth?.user?.id,
         },
+        // Search users we are not friends with.
+        ...(searchParams?.get("filter") === "not-in-contacts"
+          ? {
+              contacts: {
+                none: {
+                  userIds: {
+                    hasSome: [serverAuth?.user?.id],
+                  },
+                },
+              },
+            }
+          : {}),
       },
     });
 

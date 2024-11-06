@@ -2,7 +2,9 @@ import Text from "@/components/ui/Text";
 import Title from "@/components/ui/Title";
 import { User } from "@prisma/client";
 import Image from "next/image";
+import ContactRequestButton from "@/features/contacts/components/contact-requests/ContactRequestButton";
 import React from "react";
+import { useAuth } from "@/features/auth/hooks/use-auth";
 
 interface UserCardProps {
   className?: string;
@@ -10,6 +12,8 @@ interface UserCardProps {
 }
 
 const UserCard = ({ user }: UserCardProps) => {
+  const auth = useAuth();
+
   return (
     <div className="flex items-center space-x-3 p-2">
       <Image
@@ -31,6 +35,11 @@ const UserCard = ({ user }: UserCardProps) => {
           {user?.email}
         </Text>
       </div>
+
+      <ContactRequestButton
+        strangerId={user?.id}
+        currentUserId={auth?.user?.id as string}
+      />
     </div>
   );
 };

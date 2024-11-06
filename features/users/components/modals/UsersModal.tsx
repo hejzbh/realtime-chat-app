@@ -24,7 +24,10 @@ const UsersModal = () => {
       setLoading(true);
 
       const response = await axios.get(`/api/users`, {
-        params,
+        params: {
+          searchQuery: params?.searchQuery,
+          filter: "not-in-contacts",
+        },
       });
 
       if (!response?.data) throw new Error("Something went wrong");

@@ -16,9 +16,9 @@ const ChatSidebar = async ({ className = "" }: ChatSidebarProps) => {
 
   return (
     <aside className={`bg-sidebar p-3 ${className}`}>
-      <SidebarToolbar title="Chats" modalType="users" />
-      <RecentChats />
-      <AllChats />
+      <SidebarToolbar title="Chats" modalType="users" className="mb-5" />
+      <RecentChats chats={recentChats} className="mb-5" />
+      <AllChats chats={allChats} />
     </aside>
   );
 };

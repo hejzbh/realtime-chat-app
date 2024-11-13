@@ -32,7 +32,7 @@ export const textFontSizes: Record<FontSizeKeys, string> = {
   "5xl": "text-[1.8rem] sm:text-[1.9rem] md:text-[2rem] lg:text-[2.1rem]",
 };
 
-const Text = ({
+export const Text = ({
   className = "",
   variant = "p",
   size = "base",

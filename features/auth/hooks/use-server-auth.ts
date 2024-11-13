@@ -9,7 +9,7 @@ export const useServerAuth = async () => {
     if (!session?.user) throw new Error("");
 
     return {
-      user: session?.user as User,
+      currentUser: session?.user as User,
     };
   } catch {
     throw new Error("Unauthorized");

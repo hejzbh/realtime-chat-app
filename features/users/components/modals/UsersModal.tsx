@@ -3,14 +3,12 @@ import React, { useEffect, useState } from "react";
 import Title from "@/components/ui/Title";
 import Search from "@/components/ui/Search";
 import { User } from "@prisma/client";
-import { useAuth } from "@/features/auth/hooks/use-auth";
 import axios from "axios";
 import UserCard from "@/features/users/components/UserCard";
 import { useNotifications } from "@/hooks/use-notifications";
 
 const UsersModal = () => {
   const [users, setUsers] = useState<User[]>([]);
-  const { user } = useAuth();
   const [q, setQ] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const { showNotification } = useNotifications();

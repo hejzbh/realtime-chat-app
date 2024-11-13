@@ -20,6 +20,7 @@ const ProtectedContent = ({
     (type === "only-authenticated" && !isAuthenticated)
   ) {
     if (redirectTo) router.push(redirectTo);
+
     return null;
   }
 

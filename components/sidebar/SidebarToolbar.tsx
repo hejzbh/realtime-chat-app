@@ -26,7 +26,9 @@ const SidebarToolbar = ({
   const { openModal } = useModal();
 
   return (
-    <div className={`${className}`}>
+    <div
+      className={`border-b-[1px] border-borderColors-primary pb-5 ${className}`}
+    >
       {" "}
       {/** Title & Button */}
       <div className="flex items-center justify-between">

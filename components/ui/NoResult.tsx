@@ -12,7 +12,7 @@ interface NoResultProps {
 const NoResult = ({ className = "", title, description }: NoResultProps) => {
   return (
     <div className={`text-center ${className}`}>
-      <TfiFaceSad className="mb-5" />
+      <TfiFaceSad className="mb-3 mx-auto" />
       <Title variant="h2">{title}</Title>
       <Text>{description}</Text>
     </div>

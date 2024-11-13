@@ -23,23 +23,25 @@ const UserCard = ({ user }: UserCardProps) => {
         width={35}
         height={35}
       />
-      <div>
-        <Title
-          variant="h3"
-          textSize="base"
-          className="font-[400]  text-textColors-primary"
-        >
-          {user?.name}
-        </Title>
-        <Text className="text-textColors-secondary" size="sm">
-          {user?.email}
-        </Text>
-      </div>
 
-      <ContactRequestButton
-        strangerId={user?.id}
-        currentUserId={auth?.user?.id as string}
-      />
+      <div className="flex items-center justify-between w-full">
+        <div>
+          <Title
+            variant="h3"
+            textSize="base"
+            className="font-[400]  text-textColors-primary"
+          >
+            {user?.name}
+          </Title>
+          <Text className="text-textColors-secondary" size="sm">
+            {user?.email}
+          </Text>
+        </div>
+        <ContactRequestButton
+          currentUserId={auth?.user?.id as string}
+          strangerId={user?.id}
+        />
+      </div>
     </div>
   );
 };

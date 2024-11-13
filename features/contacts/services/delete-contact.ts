@@ -2,9 +2,17 @@
 import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 
-export const declineContactRequest = async (requestId: string) => {
+export const deleteContact = async (contactId: string) => {
   try {
-    await db.contactRequest.delete({ where: { id: requestId } });
+    await Promise.all([
+      // Delete contact
+      db.contact.delete({
+        where: {
+          id: contactId,
+        },
+      }),
+      // Delete chat
+    ]);
 
     revalidatePath("/contacts");
   } catch (err: any) {
@@ -13,3 +21,5 @@ export const declineContactRequest = async (requestId: string) => {
     );
   }
 };
+
+export default deleteContact;

@@ -4,9 +4,9 @@ import { useMemo } from "react";
 export const useChat = () => {
   const params = useParams();
 
-  const chatId = useMemo(() => params?.chatId || "", [params?.chatId]);
+  const currentChatId = useMemo(() => params?.chatId || "", [params?.chatId]);
 
-  return useMemo(() => ({ chatId }), [chatId]);
+  return useMemo(() => ({ currentChatId }), [currentChatId]);
 };
 
 export default useChat;

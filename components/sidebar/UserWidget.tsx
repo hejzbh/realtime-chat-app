@@ -11,15 +11,15 @@ interface UserWidgetProps {
 }
 
 const UserWidget = ({ className = "" }: UserWidgetProps) => {
-  const { user } = useAuth();
+  const { currentUser } = useAuth();
 
-  if (!user) return null;
+  if (!currentUser) return null;
 
   return (
     <div className={`${className}`}>
       <Button className="!p-0 bg-transparent hover:!bg-transparent">
         <Image
-          src={user?.image || "/images/user.webp"}
+          src={currentUser?.image || "/images/user.webp"}
           alt="Avatar"
           className="rounded-full drop-shadow-md"
           width={60}

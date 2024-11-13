@@ -14,7 +14,7 @@ const Logo = ({ className = "" }: LogoProps) => {
         src={"/images/logo.webp"}
         width={150}
         height={150}
-        className={clsx("w-[80px] md:w-[150px]")}
+        className={clsx("w-[60px] md:w-[150px]")}
         loading="lazy"
         alt="Logo"
       />

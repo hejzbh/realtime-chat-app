@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import {
   checkContactRequestStatus,
   ContactStatus,
-} from "../../services/check-request-status";
+} from "@/features/contacts/services/check-request-status";
+import { sendContactRequest } from "@/features/contacts/services/send-contact-request";
+import Button from "@/components/ui/Button";
 
 interface ContactRequestButtonProps {
   currentUserId: string;
@@ -10,32 +12,52 @@ interface ContactRequestButtonProps {
 }
 
 const ContactRequestButton = ({
-  strangerId,
   currentUserId,
+  strangerId,
 }: ContactRequestButtonProps) => {
   const [loading, setLoading] = useState<boolean>();
   const [status, setStatus] = useState<ContactStatus>();
 
   useEffect(() => {
-    if (!strangerId || !currentUserId) return;
+    if (!currentUserId || !strangerId) return;
 
     setLoading(true);
-    checkContactRequestStatus(currentUserId, strangerId)
+    checkContactRequestStatus({ userIds: [currentUserId, strangerId] })
       .then(setStatus)
       .finally(() => {
         setLoading(false);
       });
-  }, [strangerId, currentUserId]);
+  }, [currentUserId, strangerId]);
 
   if (loading) return "Loading...";
 
+  // onClick = ()=> { sentContact().then(()=>setStatus("requestSent")) }
   switch (status) {
     case "inContact":
-      return <div className="text-red-500">"Remove contact"</div>;
+      return <Button variant="danger">Remove contact</Button>;
+
     case "requestSent":
-      return <div className="text-red-500">"Request already sent"</div>;
+      return (
+        <Button disabled variant="outline">
+          Request Sent
+        </Button>
+      );
     case "nothing":
-      return <div className="text-red-500">"Add contact"</div>;
+      return (
+        <Button
+          variant="primary"
+          onClick={() => {
+            sendContactRequest({
+              senderId: currentUserId,
+              recieverId: strangerId,
+            }).then(() => {
+              setStatus("requestSent");
+            });
+          }}
+        >
+          Add Contact
+        </Button>
+      );
     default:
       return null;
   }

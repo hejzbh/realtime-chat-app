@@ -6,7 +6,7 @@ import React, { useEffect, useMemo, useState } from "react";
 export type AuthContextType = {
   isLoading: boolean;
   isAuthenticated: boolean;
-  user?: User;
+  currentUser?: User;
 };
 
 export const AuthContext = React.createContext<AuthContextType | undefined>(
@@ -25,7 +25,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const value = useMemo(
     () => ({
-      user: session?.data?.user as User,
+      currentUser: session?.data?.user as User,
       isLoading,
       isAuthenticated,
     }),

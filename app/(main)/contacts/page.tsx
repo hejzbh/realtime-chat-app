@@ -18,8 +18,11 @@ const ContactsPage = async ({
     searchParamsPromise.then(res)
   );
   return (
-    <div className="grid grid-cols-[20%,80%]">
-      <ContactsSidebar className="min-h-[100dvh]" searchParams={searchParams} />
+    <div className="lg:grid lg:grid-cols-[25%,75%] 3xl:grid-cols-[20%,80%]">
+      <ContactsSidebar
+        className="min-h-[100dvh]  hidden lg:block"
+        searchParams={searchParams}
+      />
       <main></main>
     </div>
   );

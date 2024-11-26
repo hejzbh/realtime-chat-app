@@ -5,6 +5,7 @@ import Image from "next/image";
 import ContactRequestButton from "@/features/contacts/components/contact-requests/ContactRequestButton";
 import React from "react";
 import { useAuth } from "@/features/auth/hooks/use-auth";
+import Avatar from "@/components/ui/Avatar";
 
 interface UserCardProps {
   className?: string;
@@ -16,13 +17,7 @@ const UserCard = ({ user }: UserCardProps) => {
 
   return (
     <div className="flex items-center space-x-3 p-2">
-      <Image
-        src={user?.image || "/images/user.webp"}
-        alt="Avatar"
-        className="rounded-full drop-shadow-md"
-        width={35}
-        height={35}
-      />
+      <Avatar imageURL={user?.image} />
 
       <div className="flex items-center justify-between w-full">
         <div>

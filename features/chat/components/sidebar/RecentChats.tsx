@@ -1,10 +1,10 @@
 import Title from "@/components/ui/Title";
-import { Chat } from "@prisma/client";
 import React from "react";
 import ChatCard from "./ChatCard";
+import { ChatWithMessages } from "../../services/get-chats";
 
 export interface RecentChatsProps {
-  chats: Chat[];
+  chats: ChatWithMessages[];
   className?: string;
 }
 

@@ -1,5 +1,7 @@
 import { db } from "@/lib/db";
-import { Chat } from "@prisma/client";
+import { Chat, Message, User } from "@prisma/client";
+
+export type ChatWithMessages = Chat & { messages: Message[]; users: User[] };
 
 export const getChats = async (filter: "all-chats" | "recent-chats") => {
   try {
@@ -10,6 +12,7 @@ export const getChats = async (filter: "all-chats" | "recent-chats") => {
       chats = await db.chat.findMany({
         include: {
           users: true,
+          messages: { take: 1 },
         },
       });
     }
@@ -23,13 +26,13 @@ export const getChats = async (filter: "all-chats" | "recent-chats") => {
         },
         include: {
           users: true,
+          messages: { take: 1 },
         },
       });
     }
 
-    return chats;
+    return chats as ChatWithMessages[];
   } catch (err: any) {
-    console.error(err);
     throw new Error(
       err?.response?.data?.message || err.response?.data || err.message
     );
